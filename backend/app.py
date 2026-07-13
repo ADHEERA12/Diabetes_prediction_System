@@ -6,8 +6,12 @@ import numpy as np
 app = Flask(__name__)
 CORS(app)
 
-model = pickle.load(open("diabetes_model.pkl", "rb"))
-scaler = pickle.load(open("scaler.pkl", "rb"))
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = pickle.load(open(os.path.join(BASE_DIR, "diabetes_model.pkl"), "rb"))
+scaler = pickle.load(open(os.path.join(BASE_DIR, "scaler.pkl"), "rb"))
 
 @app.route("/predict", methods=["POST"])
 def predict():
